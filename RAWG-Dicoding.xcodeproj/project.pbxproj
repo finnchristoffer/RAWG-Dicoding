@@ -9,20 +9,21 @@
 /* Begin PBXBuildFile section */
 		4A5D9F1D29B60E1D00A530D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5D9F1C29B60E1D00A530D2 /* AppDelegate.swift */; };
 		4A5D9F1F29B60E1D00A530D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5D9F1E29B60E1D00A530D2 /* SceneDelegate.swift */; };
-		4A5D9F2129B60E1D00A530D2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5D9F2029B60E1D00A530D2 /* ViewController.swift */; };
 		4A5D9F2629B60E1E00A530D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A5D9F2529B60E1E00A530D2 /* Assets.xcassets */; };
 		4A5D9F3629B61F4200A530D2 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5D9F3529B61F4200A530D2 /* Game.swift */; };
 		4A5D9F3829B61F7400A530D2 /* Date+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5D9F3729B61F7400A530D2 /* Date+Extentions.swift */; };
 		4A5D9F3A29B62A6100A530D2 /* GameDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5D9F3929B62A6100A530D2 /* GameDetail.swift */; };
 		4A5D9F3C29B62A9100A530D2 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5D9F3B29B62A9100A530D2 /* Config.swift */; };
 		4A5D9F3E29B62ABF00A530D2 /* GameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5D9F3D29B62ABF00A530D2 /* GameService.swift */; };
+		4A5D9F4129B62E4000A530D2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5D9F4029B62E4000A530D2 /* TabBarController.swift */; };
+		4A5D9F4329B62E9C00A530D2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5D9F4229B62E9C00A530D2 /* HomeViewController.swift */; };
+		4A5D9F4529B62EA700A530D2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5D9F4429B62EA700A530D2 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4A5D9F1929B60E1D00A530D2 /* RAWG-Dicoding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RAWG-Dicoding.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A5D9F1C29B60E1D00A530D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A5D9F1E29B60E1D00A530D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4A5D9F2029B60E1D00A530D2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4A5D9F2529B60E1E00A530D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A5D9F2A29B60E1E00A530D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A5D9F3529B61F4200A530D2 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -30,6 +31,9 @@
 		4A5D9F3929B62A6100A530D2 /* GameDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetail.swift; sourceTree = "<group>"; };
 		4A5D9F3B29B62A9100A530D2 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		4A5D9F3D29B62ABF00A530D2 /* GameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameService.swift; sourceTree = "<group>"; };
+		4A5D9F4029B62E4000A530D2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		4A5D9F4229B62E9C00A530D2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		4A5D9F4429B62EA700A530D2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,7 @@
 		4A5D9F1B29B60E1D00A530D2 /* RAWG-Dicoding */ = {
 			isa = PBXGroup;
 			children = (
+				4A5D9F3F29B62E2700A530D2 /* Controllers */,
 				4A5D9F3429B61F2100A530D2 /* Services */,
 				4A5D9F3329B61F1D00A530D2 /* Utils */,
 				4A5D9F3229B61F1400A530D2 /* Extentions */,
@@ -69,7 +74,6 @@
 				4A5D9F3029B61F0800A530D2 /* Models */,
 				4A5D9F1C29B60E1D00A530D2 /* AppDelegate.swift */,
 				4A5D9F1E29B60E1D00A530D2 /* SceneDelegate.swift */,
-				4A5D9F2029B60E1D00A530D2 /* ViewController.swift */,
 				4A5D9F2529B60E1E00A530D2 /* Assets.xcassets */,
 				4A5D9F2A29B60E1E00A530D2 /* Info.plist */,
 			);
@@ -114,6 +118,16 @@
 				4A5D9F3D29B62ABF00A530D2 /* GameService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		4A5D9F3F29B62E2700A530D2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4A5D9F4029B62E4000A530D2 /* TabBarController.swift */,
+				4A5D9F4229B62E9C00A530D2 /* HomeViewController.swift */,
+				4A5D9F4429B62EA700A530D2 /* ProfileViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,10 +200,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A5D9F3829B61F7400A530D2 /* Date+Extentions.swift in Sources */,
-				4A5D9F2129B60E1D00A530D2 /* ViewController.swift in Sources */,
 				4A5D9F1D29B60E1D00A530D2 /* AppDelegate.swift in Sources */,
+				4A5D9F4129B62E4000A530D2 /* TabBarController.swift in Sources */,
+				4A5D9F4329B62E9C00A530D2 /* HomeViewController.swift in Sources */,
 				4A5D9F3C29B62A9100A530D2 /* Config.swift in Sources */,
 				4A5D9F1F29B60E1D00A530D2 /* SceneDelegate.swift in Sources */,
+				4A5D9F4529B62EA700A530D2 /* ProfileViewController.swift in Sources */,
 				4A5D9F3A29B62A6100A530D2 /* GameDetail.swift in Sources */,
 				4A5D9F3629B61F4200A530D2 /* Game.swift in Sources */,
 				4A5D9F3E29B62ABF00A530D2 /* GameService.swift in Sources */,
