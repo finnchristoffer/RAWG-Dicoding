@@ -8,4 +8,5 @@ target 'RAWG-Dicoding' do
   # Pods for RAWG-Dicoding
 
   pod 'Kingfisher'
+  pod 'Alamofire'
 end
