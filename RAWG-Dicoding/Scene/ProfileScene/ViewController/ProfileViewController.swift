@@ -29,6 +29,7 @@ class ProfileViewController: UIViewController {
        let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.numberOfLines = 0
+        label.textColor = UIColor.label
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -37,6 +38,7 @@ class ProfileViewController: UIViewController {
        let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.attributedText = NSAttributedString(string: email, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+        label.textColor = UIColor.label
         return label
     }()
     
@@ -44,6 +46,7 @@ class ProfileViewController: UIViewController {
        let label = UILabel()
         label.text = "About"
         label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.textColor = UIColor.label
         return label
     }()
     
@@ -51,6 +54,7 @@ class ProfileViewController: UIViewController {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
         label.numberOfLines = 0
+        label.textColor = UIColor.label
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -59,7 +63,7 @@ class ProfileViewController: UIViewController {
        let button = UIBarButtonItem()
         button.image = UIImage(systemName: "square.and.pencil")
         button.target = self
-        button.action = #selector(editButtonTapped)
+//        button.action = #selector(editButtonTapped)
         return button
     }()
     
@@ -67,7 +71,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.systemBackground
         setupViews()
         setupConstraints()
     }
@@ -135,8 +139,8 @@ class ProfileViewController: UIViewController {
         aboutLabel.text = about
     }
     
-    @objc private func editButtonTapped() {
-        let editProfileViewController = EditProfileViewController()
-        navigationController?.pushViewController(editProfileViewController, animated: true)
-    }
+//    @objc private func editButtonTapped() {
+//        let editProfileViewController = EditProfileViewController()
+//        navigationController?.pushViewController(editProfileViewController, animated: true)
+//    }
 }

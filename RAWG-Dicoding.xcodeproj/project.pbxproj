@@ -27,6 +27,8 @@
 		4A98296629B762CA00D14812 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98296529B762CA00D14812 /* HomeViewController.swift */; };
 		4A98296829B762D400D14812 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98296729B762D400D14812 /* SearchViewController.swift */; };
 		4A98296C29B770CB00D14812 /* GameDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98296B29B770CB00D14812 /* GameDetailViewController.swift */; };
+		4A98296E29B78F3C00D14812 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98296D29B78F3C00D14812 /* HomeView.swift */; };
+		4AE0B6FB29B8D9230067932F /* GameDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE0B6FA29B8D9230067932F /* GameDetailViewModel.swift */; };
 		C80493287D53E05039E63F18 /* Pods_RAWG_Dicoding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F617565437E2764C9B77D9 /* Pods_RAWG_Dicoding.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +55,8 @@
 		4A98296529B762CA00D14812 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4A98296729B762D400D14812 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		4A98296B29B770CB00D14812 /* GameDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailViewController.swift; sourceTree = "<group>"; };
+		4A98296D29B78F3C00D14812 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		4AE0B6FA29B8D9230067932F /* GameDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailViewModel.swift; sourceTree = "<group>"; };
 		F3A8FA8219866EEEE28D69D5 /* Pods-RAWG-Dicoding.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RAWG-Dicoding.release.xcconfig"; path = "Target Support Files/Pods-RAWG-Dicoding/Pods-RAWG-Dicoding.release.xcconfig"; sourceTree = "<group>"; };
 		F5F617565437E2764C9B77D9 /* Pods_RAWG_Dicoding.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RAWG_Dicoding.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBD4E45B5D2571DAD05A0435 /* Pods-RAWG-Dicoding.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RAWG-Dicoding.debug.xcconfig"; path = "Target Support Files/Pods-RAWG-Dicoding/Pods-RAWG-Dicoding.debug.xcconfig"; sourceTree = "<group>"; };
@@ -104,7 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				4A98294D29B7062400D14812 /* ProfileScene */,
-				4A98294C29B7061D00D14812 /* FavoriteScene */,
 				4A98294B29B7061300D14812 /* GameDetailScene */,
 				4A44E2B429B7045E005B635A /* HomeScene */,
 			);
@@ -190,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				4A98296129B7086F00D14812 /* GameTableViewCell.swift */,
+				4A98296D29B78F3C00D14812 /* HomeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -219,16 +223,6 @@
 				4A98295429B7071D00D14812 /* Model */,
 			);
 			path = GameDetailScene;
-			sourceTree = "<group>";
-		};
-		4A98294C29B7061D00D14812 /* FavoriteScene */ = {
-			isa = PBXGroup;
-			children = (
-				4A98295D29B707BA00D14812 /* ViewController */,
-				4A98295C29B707B300D14812 /* ViewModel */,
-				4A98295B29B707AF00D14812 /* View */,
-			);
-			path = FavoriteScene;
 			sourceTree = "<group>";
 		};
 		4A98294D29B7062400D14812 /* ProfileScene */ = {
@@ -292,29 +286,9 @@
 		4A98295629B7072C00D14812 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				4AE0B6FA29B8D9230067932F /* GameDetailViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		4A98295B29B707AF00D14812 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		4A98295C29B707B300D14812 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		4A98295D29B707BA00D14812 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewController;
 			sourceTree = "<group>";
 		};
 		C92D5B228510A09F8D7AABA2 /* Frameworks */ = {
@@ -439,6 +413,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A5D9F4B29B6366400A530D2 /* EditProfileViewController.swift in Sources */,
+				4AE0B6FB29B8D9230067932F /* GameDetailViewModel.swift in Sources */,
 				4A98295829B7073A00D14812 /* RawgDetailModel.swift in Sources */,
 				4A5D9F3829B61F7400A530D2 /* Date+Extentions.swift in Sources */,
 				4A98296629B762CA00D14812 /* HomeViewController.swift in Sources */,
@@ -451,6 +426,7 @@
 				4A5D9F4129B62E4000A530D2 /* TabBarController.swift in Sources */,
 				4A5D9F4929B6357E00A530D2 /* ProfileModel.swift in Sources */,
 				4A98296829B762D400D14812 /* SearchViewController.swift in Sources */,
+				4A98296E29B78F3C00D14812 /* HomeView.swift in Sources */,
 				4A98294A29B705D600D14812 /* RawgModel.swift in Sources */,
 				4A5D9F1F29B60E1D00A530D2 /* SceneDelegate.swift in Sources */,
 				4A98295A29B7076700D14812 /* Secrets.swift in Sources */,

@@ -9,36 +9,33 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    // MARK: - Properties
     var orderCase = 0
+    private var homeView: HomeView!
     private var vm: HomeViewModelProtocol = HomeViewModel()
     
-    private lazy var activityIdicator: UIActivityIndicatorView = {
-       let activity = UIActivityIndicatorView()
-        return activity
+    private lazy var orderButton: UIBarButtonItem = {
+        let button = UIBarButtonItem()
+        button.target = self
+        button.image = UIImage(systemName: "line.horizontal.3.decrease")
+        button.action = #selector(orderListAction)
+        return button
     }()
-    
-    private lazy var gameListTableView: UITableView = {
-       let tableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(GameTableViewCell.self, forCellReuseIdentifier: GameTableViewCell.reuseIdentifier)
-        tableView.rowHeight = 150.0
-        return tableView
-    }()
-    
-    // MARK: - Properties
     
     // MARK: - Lifecycle
-    
+    override func loadView() {
+        super.loadView()
+        homeView = HomeView(frame: view.frame)
+        view = homeView
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = NSLocalizedString("POPULAR_GAMES", comment: "Popular games")
-        vm.delegate = self
-        activityIdicator.startAnimating()
-        vm.fetchPopularGames()
-        
         setupViews()
-        setupConstraints()
+        homeView.setupConstraints()
+        homeView.activityIndicator.startAnimating()
+        vm.fetchPopularGames()
+        vm.delegate = self
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -55,12 +52,33 @@ class HomeViewController: UIViewController {
     // MARK: - Helpers
     
     private func setupViews() {
-        view.addSubview(gameListTableView)
+        navigationItem.title = "Popular Games"
+        navigationItem.rightBarButtonItem = orderButton
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
+        view.backgroundColor = UIColor.systemBackground
+        
+        homeView.gameListTableView.delegate = self
+        homeView.gameListTableView.dataSource = self
     }
     
-    private func setupConstraints() {
-        let safeArea = view.safeAreaLayoutGuide
-        gameListTableView.anchor(top: safeArea.topAnchor, left: safeArea.leftAnchor, bottom: safeArea.bottomAnchor, right: safeArea.rightAnchor)
+    @objc private func orderListAction(_ sender: Any) {
+        orderCase += 1
+        switch orderCase {
+        case 1:
+            vm.orderList(opt: orderCase)
+            orderButton.image = UIImage(systemName: "a.square")
+        case 2:
+            vm.orderList(opt: orderCase)
+            orderButton.image = UIImage(systemName: "30.square")
+        case 3:
+            vm.orderList(opt: orderCase)
+            orderButton.image = UIImage(systemName: "star.square")
+        default:
+            vm.orderList(opt: orderCase)
+            orderButton.image = UIImage(systemName: "line.horizontal.3.decrease")
+            orderCase = 0
+        }
     }
 }
 
@@ -68,15 +86,23 @@ class HomeViewController: UIViewController {
 // MARK: - Delegate Functions
 extension HomeViewController: HomeViewModelDelegate {
     func gamesLoaded() {
-        gameListTableView.reloadData()
-        activityIdicator.stopAnimating()
+        homeView.gameListTableView.reloadData()
+        homeView.activityIndicator.stopAnimating()
     }
 }
 
 
 // MARK: - Tableview Functions
 extension HomeViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let gameId = vm.getGameId(at: indexPath.row) {
+            let detailVC = GameDetailViewController()
+            detailVC.gameId = gameId
+            detailVC.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(detailVC, animated: true)
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 extension HomeViewController: UITableViewDataSource {
@@ -91,4 +117,5 @@ extension HomeViewController: UITableViewDataSource {
         }
         return cell
     }
+    
 }

@@ -15,16 +15,18 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
 
         let homeVC = UINavigationController(rootViewController: HomeViewController())
+        let searchVC = UINavigationController(rootViewController: SearchViewController())
         let profileVC = UINavigationController(rootViewController: ProfileViewController())
 
         homeVC.title = "Home"
-        profileVC.title = "Search"
+        searchVC.title = "Search"
+        profileVC.title = "Profile"
 
-        self.setViewControllers([homeVC, profileVC], animated: true)
+        self.setViewControllers([homeVC,searchVC ,profileVC], animated: true)
 
         guard let items = self.tabBar.items else {return}
 
-        let imageItem = ["house.fill", "person.fill"]
+        let imageItem = ["house.fill","magnifyingglass","person.fill"]
 
         for item in 0..<items.count {
             items[item].image = UIImage(systemName: imageItem[item])

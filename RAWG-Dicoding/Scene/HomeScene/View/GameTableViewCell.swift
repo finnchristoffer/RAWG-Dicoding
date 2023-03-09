@@ -13,23 +13,26 @@ class GameTableViewCell: UITableViewCell {
     static let reuseIdentifier = "GameTableViewCell"
     
     // MARK: - Properties
-    let gameImageView: UIImageView = {
+    private lazy var gameImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 7.5
+        imageView.layer.cornerRadius = 10
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    let gameTitleLabel: UILabel = {
+    private lazy var gameTitleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.numberOfLines = 1
+        label.lineBreakMode = .byTruncatingTail
+        label.adjustsFontSizeToFitWidth = false
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let gameSubtitleLabel: UILabel = {
+    private lazy var gameSubtitleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = UIColor.secondaryLabel
@@ -113,7 +116,7 @@ class GameTableViewCell: UITableViewCell {
     private func setupConstraints() {
         gameImageView.anchor(top: topAnchor, bottom: bottomAnchor, width: 85, height: 125 ,leading: leadingAnchor,  paddingTop: 10, paddingLeft: 15, paddingBottom: 12)
         
-        gameTitleLabel.anchor(top: topAnchor, left: gameImageView.rightAnchor, paddingTop: 10, paddingLeft: 10)
+        gameTitleLabel.anchor(top: topAnchor, left: gameImageView.rightAnchor, right: rightAnchor, paddingTop: 10, paddingLeft: 10, paddingRight: 10)
         
         gameSubtitleLabel.anchor(top: gameTitleLabel.bottomAnchor, left: gameImageView.rightAnchor, paddingTop: 10, paddingLeft: 10)
         
