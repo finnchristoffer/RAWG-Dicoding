@@ -10,13 +10,13 @@ import UIKit
 class SearchViewController: UIViewController {
     
     // MARK: - Properties
-    var modalCall: Int?
     private var vm: HomeViewModelProtocol = HomeViewModel()
     
     private lazy var searchStatusLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.center = view.center
         label.text = "You can Search Game"
         return label
     }()
@@ -25,6 +25,7 @@ class SearchViewController: UIViewController {
        let searchBar = UISearchBar()
         searchBar.placeholder = "Find what kind of you want..."
         searchBar.delegate = self
+        searchBar.becomeFirstResponder()
         return searchBar
     }()
     
@@ -37,13 +38,13 @@ class SearchViewController: UIViewController {
         return tableView
     }()
     
-    lazy var activityIndicator: UIActivityIndicatorView = {
-        let activity = UIActivityIndicatorView(style: .large)
-        activity.hidesWhenStopped = false
-        activity.color = .white
-        activity.translatesAutoresizingMaskIntoConstraints = false
-        return activity
-    }()
+    let activityIndatorView = UIActivityIndicatorView(style: .medium)
+    
+    func showActivityIndicatory() {
+        activityIndatorView.center = view.center
+        activityIndatorView.hidesWhenStopped = true
+        activityIndatorView.startAnimating()
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -51,9 +52,10 @@ class SearchViewController: UIViewController {
         view.backgroundColor = UIColor.systemBackground
         navigationItem.title = "Search Games"
         navigationController?.navigationBar.prefersLargeTitles = true
+        statusHelper(0)
         setupViews()
         setupConstraints()
-        statusHelper(0)
+        
         vm.delegate = self
         
     }
@@ -75,7 +77,7 @@ class SearchViewController: UIViewController {
     
     private func setupViews() {
         view.addSubview(searchBar)
-        view.bringSubviewToFront(searchStatusLabel)
+        view.addSubview(searchStatusLabel)
         view.addSubview(gameListTableView)
     }
     
@@ -83,7 +85,6 @@ class SearchViewController: UIViewController {
         let safeArea = view.safeAreaLayoutGuide
         searchBar.anchor(top: safeArea.topAnchor, left: safeArea.leftAnchor, right: safeArea.rightAnchor)
         
-//        searchStatusLabel.anchor(top: safeArea.topAnchor, left: safeArea.leftAnchor, bottom: safeArea.bottomAnchor, right: safeArea.rightAnchor)
         
         gameListTableView.anchor(top: searchBar.bottomAnchor, left: safeArea.leftAnchor,bottom: safeArea.bottomAnchor ,right: safeArea.rightAnchor)
     }
@@ -92,11 +93,13 @@ class SearchViewController: UIViewController {
         searchStatusLabel.tag = status
         switch status {
         case 0:
+
             searchStatusLabel.text = "You can Search Game"
             searchStatusLabel.isHidden = false
         case 1:
             searchStatusLabel.isHidden = true
-            activityIndicator.startAnimating()
+            showActivityIndicatory()
+            view.addSubview(activityIndatorView)
         case 2:
             searchStatusLabel.text = "No Result"
             searchStatusLabel.isHidden = false
@@ -112,7 +115,7 @@ class SearchViewController: UIViewController {
 extension SearchViewController: HomeViewModelDelegate {
     func gamesLoaded() {
         gameListTableView.reloadData()
-        activityIndicator.stopAnimating()
+        activityIndatorView.stopAnimating()
     }
 }
 

@@ -22,6 +22,14 @@ class HomeViewController: UIViewController {
         return button
     }()
     
+    let activityIndatorView = UIActivityIndicatorView(style: .medium)
+    
+    func showActivityIndicatory() {
+        activityIndatorView.center = view.center
+        activityIndatorView.hidesWhenStopped = true
+        activityIndatorView.startAnimating()
+    }
+    
     // MARK: - Lifecycle
     override func loadView() {
         super.loadView()
@@ -32,7 +40,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         homeView.setupConstraints()
-        homeView.activityIndicator.startAnimating()
+        
         vm.fetchPopularGames()
         vm.delegate = self
 
@@ -60,6 +68,9 @@ class HomeViewController: UIViewController {
         
         homeView.gameListTableView.delegate = self
         homeView.gameListTableView.dataSource = self
+        
+        showActivityIndicatory()
+        view.addSubview(activityIndatorView)
     }
     
     @objc private func orderListAction(_ sender: Any) {
@@ -87,7 +98,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController: HomeViewModelDelegate {
     func gamesLoaded() {
         homeView.gameListTableView.reloadData()
-        homeView.activityIndicator.stopAnimating()
+        activityIndatorView.stopAnimating()
     }
 }
 
@@ -119,3 +130,4 @@ extension HomeViewController: UITableViewDataSource {
     }
     
 }
+

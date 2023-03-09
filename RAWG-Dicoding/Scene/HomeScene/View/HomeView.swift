@@ -12,15 +12,6 @@ class HomeView: UIView {
     
     var homeViewController: HomeViewController?
     
-    lazy var activityIndicator: UIActivityIndicatorView = {
-        let activity = UIActivityIndicatorView(style: .medium)
-        activity.center = center
-        activity.hidesWhenStopped = true
-        activity.isUserInteractionEnabled = true
-        activity.translatesAutoresizingMaskIntoConstraints = false
-        return activity
-    }()
-    
     lazy var gameListTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(GameTableViewCell.self, forCellReuseIdentifier: GameTableViewCell.reuseIdentifier)
@@ -43,7 +34,6 @@ class HomeView: UIView {
     // MARK: - Helpers
     
     private func setupViews() {
-        bringSubviewToFront(activityIndicator)
         addSubview(gameListTableView)
     }
 
@@ -51,7 +41,7 @@ class HomeView: UIView {
     func setupConstraints() {
         let safeArea = safeAreaLayoutGuide
         
-//        activityIndicator.anchor(top: safeArea.topAnchor, left: safeArea.leftAnchor, bottom: safeArea.bottomAnchor, right: safeArea.rightAnchor)
+
         
         gameListTableView.anchor(top: safeArea.topAnchor, left: safeArea.leftAnchor, bottom: safeArea.bottomAnchor, right: safeArea.rightAnchor)
     }

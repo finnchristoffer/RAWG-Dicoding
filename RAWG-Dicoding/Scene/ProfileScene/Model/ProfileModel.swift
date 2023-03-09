@@ -49,13 +49,13 @@ struct ProfileModel {
         }
     }
 
-    static func deteleAll() -> Bool {
-        if let domain = Bundle.main.bundleIdentifier {
-            UserDefaults.standard.removePersistentDomain(forName: domain)
-            synchronize()
-            return true
-        } else { return false }
-    }
+//    static func deteleAll() -> Bool {
+//        if let domain = Bundle.main.bundleIdentifier {
+//            UserDefaults.standard.removePersistentDomain(forName: domain)
+//            synchronize()
+//            return true
+//        } else { return false }
+//    }
 
     static func synchronize() {
         UserDefaults.standard.synchronize()

@@ -93,6 +93,7 @@ class GameDetailViewController: UIViewController {
         button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
         let image = UIImage(systemName: "desktopcomputer")
+        button.addTarget(self, action: #selector(pressInfoGame), for: .touchUpInside)
         button.setImage(image, for: .normal)
         return button
     }()
@@ -102,6 +103,7 @@ class GameDetailViewController: UIViewController {
         button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
         let image = UIImage(systemName: "xbox.logo")
+        button.addTarget(self, action: #selector(pressInfoGame), for: .touchUpInside)
         button.setImage(image, for: .normal)
         return button
     }()
@@ -111,6 +113,7 @@ class GameDetailViewController: UIViewController {
         button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
         let image = UIImage(systemName: "playstation.logo")
+        button.addTarget(self, action: #selector(pressInfoGame), for: .touchUpInside)
         button.setImage(image, for: .normal)
         return button
     }()
@@ -120,11 +123,12 @@ class GameDetailViewController: UIViewController {
         button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
         let image = UIImage(systemName: "n.square.fill")
+        button.addTarget(self, action: #selector(pressInfoGame), for: .touchUpInside)
         button.setImage(image, for: .normal)
         return button
     }()
     
-    let gameStackView: UIStackView = {
+    private lazy var gameStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.distribution = .fillEqually
         stackView.spacing = 5
@@ -132,13 +136,21 @@ class GameDetailViewController: UIViewController {
         return stackView
     }()
     
-    let infoStackView: UIStackView = {
+    private lazy var infoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.distribution = .fillEqually
         stackView.spacing = 5
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    let activityIndatorView = UIActivityIndicatorView(style: .medium)
+    
+    func showActivityIndicatory() {
+        activityIndatorView.center = view.center
+        activityIndatorView.hidesWhenStopped = true
+        activityIndatorView.startAnimating()
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -174,6 +186,9 @@ class GameDetailViewController: UIViewController {
         gameStackView.addArrangedSubview(platformSony)
         gameStackView.addArrangedSubview(platformNintendo)
         view.addSubview(gameStackView)
+        
+        showActivityIndicatory()
+        view.addSubview(activityIndatorView)
     }
     
     private func setupConstraints() {
@@ -196,9 +211,17 @@ class GameDetailViewController: UIViewController {
     
     
     // MARK: - Actions
-    @objc func pressInfoGame(_ sender: Any) {
+    @objc func pressInfoGame() {
         if let url = URL(string: Globals.sharedInstance.backlinkHelper(id: gameId)) {
-            UIApplication.shared.open(url)
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            } else {
+                // Handle error: the URL cannot be opened
+                print("Cannot open URL: \(url)")
+            }
+        } else {
+            // Handle error: the URL string is invalid
+            print("Invalid URL string")
         }
     }
     
@@ -253,5 +276,6 @@ extension GameDetailViewController: GameDetailViewModelDelegate {
                 self.enablePlatform(id: i.platform?.id ?? 0)
             }
         }
+        activityIndatorView.stopAnimating()
     }
 }
