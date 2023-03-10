@@ -83,6 +83,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		4A18451F29BAFB6D00098BBD /* TabBarScene */ = {
+			isa = PBXGroup;
+			children = (
+				4A5D9F4029B62E4000A530D2 /* TabBarController.swift */,
+			);
+			path = TabBarScene;
+			sourceTree = "<group>";
+		};
 		4A44E2B129B7040B005B635A /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +115,7 @@
 		4A44E2B329B70425005B635A /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				4A18451F29BAFB6D00098BBD /* TabBarScene */,
 				4A98294D29B7062400D14812 /* ProfileScene */,
 				4A98294B29B7061300D14812 /* GameDetailScene */,
 				4A44E2B429B7045E005B635A /* HomeScene */,
@@ -149,7 +158,6 @@
 				4A44E2B129B7040B005B635A /* App */,
 				4A44E2B229B70412005B635A /* Core */,
 				4A44E2B329B70425005B635A /* Scene */,
-				4A5D9F3F29B62E2700A530D2 /* Controllers */,
 				4A5D9F2529B60E1E00A530D2 /* Assets.xcassets */,
 				4A5D9F2A29B60E1E00A530D2 /* Info.plist */,
 			);
@@ -170,14 +178,6 @@
 				4A5D9F3729B61F7400A530D2 /* Date+Extentions.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		4A5D9F3F29B62E2700A530D2 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				4A5D9F4029B62E4000A530D2 /* TabBarController.swift */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		4A98294529B705AC00D14812 /* Model */ = {

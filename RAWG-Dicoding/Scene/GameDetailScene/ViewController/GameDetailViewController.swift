@@ -140,6 +140,7 @@ class GameDetailViewController: UIViewController {
         let stackView = UIStackView()
         stackView.distribution = .fillEqually
         stackView.spacing = 5
+        stackView.isHidden = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -276,6 +277,7 @@ extension GameDetailViewController: GameDetailViewModelDelegate {
                 self.enablePlatform(id: i.platform?.id ?? 0)
             }
         }
+        infoStackView.isHidden = false
         activityIndatorView.stopAnimating()
     }
 }
