@@ -40,6 +40,14 @@ class GameTableViewCell: UITableViewCell {
         return label
     }()
     
+    private lazy var gameDateReleaseLabel: UILabel = {
+       let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = UIColor.secondaryLabel
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private lazy var platformPC: UIButton = {
        let button = UIButton()
         button.isHidden = true
@@ -76,6 +84,15 @@ class GameTableViewCell: UITableViewCell {
         return button
     }()
     
+    private lazy var RateCapsule: UIButton = {
+       let button = UIButton()
+        button.layer.cornerRadius = 5
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.tintColor = UIColor.label
+        button.backgroundColor = UIColor.systemBlue
+        return button
+    }()
+    
     let gameStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.distribution = .fillEqually
@@ -87,7 +104,7 @@ class GameTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         setupViews()
         setupConstraints()
     }
@@ -103,6 +120,8 @@ class GameTableViewCell: UITableViewCell {
     // MARK: - Helpers
     
     private func setupViews() {
+        addSubview(RateCapsule)
+        gameImageView.addSubview(RateCapsule)
         addSubview(gameImageView)
         addSubview(gameTitleLabel)
         addSubview(gameSubtitleLabel)
@@ -111,6 +130,7 @@ class GameTableViewCell: UITableViewCell {
         gameStackView.addArrangedSubview(platformSony)
         gameStackView.addArrangedSubview(platformNintendo)
         addSubview(gameStackView)
+        addSubview(gameDateReleaseLabel)
     }
     
     private func setupConstraints() {
@@ -121,21 +141,26 @@ class GameTableViewCell: UITableViewCell {
         gameSubtitleLabel.anchor(top: gameTitleLabel.bottomAnchor, left: gameImageView.rightAnchor, paddingTop: 10, paddingLeft: 10)
         
         gameStackView.anchor(top: gameSubtitleLabel.bottomAnchor, left: gameImageView.rightAnchor, paddingTop: 10, paddingLeft: 10)
+        
+        gameDateReleaseLabel.anchor(top: gameStackView.bottomAnchor, left: gameImageView.rightAnchor, paddingTop: 15, paddingLeft: 10)
+        
+        RateCapsule.anchor(top: gameImageView.topAnchor, leading: gameImageView.leadingAnchor)
     }
     
     func configureCell(_ game:RawgModel){
         gameTitleLabel.text = game.name
         gameSubtitleLabel.text = gameInfoCreator(game)
+        gameDateReleaseLabel.text = gameInfoDate(game)
         changeImage(imgUrl: game.imageWide)
         if let platforms = game.parentPlatforms{
             for i in platforms{
                 enablePlatform(id: i.platform?.id ?? 0)
             }
         }
+        RateCapsule.setTitle(gameInfoRate(game), for: .normal)
     }
     
     private func gameInfoCreator(_ game:RawgModel) -> String{
-        let dateString = (game.tba ?? false) ? "TBA" : (game.released?.prefix(4) ?? "TBA")
         var genreString = ""
         if let genres = game.genres, ((game.genres?.count ?? 0) != 0){
             for i in genres{
@@ -144,7 +169,16 @@ class GameTableViewCell: UITableViewCell {
             }
             genreString.removeLast(2)
         }
-        return "\(dateString) | \(genreString) "
+        return "\(genreString)"
+    }
+    
+    private func gameInfoDate(_ game:RawgModel) -> String {
+        let dateString = (game.tba ?? false) ? "TBA" : (game.released ?? "TBA")
+        return "Released date: \(dateString)"
+    }
+    
+    private func gameInfoRate(_ game:RawgModel) -> String {
+        Globals.sharedInstance.Esrb(id: game.rating?.id)
     }
     
     private func enablePlatform(id:Int){
