@@ -36,6 +36,7 @@ class HomeViewController: UIViewController {
         homeView = HomeView(frame: view.frame)
         view = homeView
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -46,17 +47,6 @@ class HomeViewController: UIViewController {
 
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "HometoDetail":
-            if let gameId = sender as? Int {
-                let goalVC = segue.destination as! GameDetailViewController
-                goalVC.gameId = gameId
-            }
-        default:
-            print("Identifier not found")
-        }
-    }
     // MARK: - Helpers
     
     private func setupViews() {

@@ -5,8 +5,6 @@
 //  Created by Finn Christoffer Kurniawan on 07/03/23.
 //
 
-import Foundation
-
 struct RawgModel: Decodable {
     let id: Int?
     let tba: Bool?

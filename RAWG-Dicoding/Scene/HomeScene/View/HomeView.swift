@@ -37,12 +37,9 @@ class HomeView: UIView {
         addSubview(gameListTableView)
     }
 
-    
     func setupConstraints() {
         let safeArea = safeAreaLayoutGuide
-        
-
-        
+    
         gameListTableView.anchor(top: safeArea.topAnchor, left: safeArea.leftAnchor, bottom: safeArea.bottomAnchor, right: safeArea.rightAnchor)
     }
 }

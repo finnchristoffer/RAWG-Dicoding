@@ -93,7 +93,7 @@ class GameTableViewCell: UITableViewCell {
         return button
     }()
     
-    let gameStackView: UIStackView = {
+    private lazy var gameStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.distribution = .fillEqually
         stackView.spacing = 5
@@ -172,13 +172,16 @@ class GameTableViewCell: UITableViewCell {
         return "\(genreString)"
     }
     
-    private func gameInfoDate(_ game:RawgModel) -> String {
+    private func gameInfoDate(_ game: RawgModel) -> String {
         let dateString = (game.tba ?? false) ? "TBA" : (game.released ?? "TBA")
         return "Released date: \(dateString)"
     }
     
     private func gameInfoRate(_ game:RawgModel) -> String {
-        Globals.sharedInstance.Esrb(id: game.rating?.id)
+        if let score:Int = game.metacritic{
+            return String(score)
+        }
+        return "TBA"
     }
     
     private func enablePlatform(id:Int){

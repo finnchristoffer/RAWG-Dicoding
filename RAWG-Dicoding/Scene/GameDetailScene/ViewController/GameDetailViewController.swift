@@ -11,6 +11,7 @@ import Kingfisher
 class GameDetailViewController: UIViewController {
     // MARK: - Properties
     var gameId: Int?
+    var delegateFavorite: FavoriteViewController?
     private var vm: GameDetailViewModelProtocol = GameDetailViewModel()
     
     private lazy var gameImageView: UIImageView = {
@@ -43,7 +44,7 @@ class GameDetailViewController: UIViewController {
     }()
     
     private lazy var gamePublisherLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor.secondaryLabel
         label.textAlignment = .center
@@ -62,7 +63,7 @@ class GameDetailViewController: UIViewController {
     }()
     
     private lazy var RateCapsule: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.tintColor = UIColor.label
@@ -71,16 +72,17 @@ class GameDetailViewController: UIViewController {
     }()
     
     private lazy var DateCapsule: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.tintColor = UIColor.label
         button.backgroundColor = UIColor.systemBlue
+        button.setImage(UIImage(systemName: "calendar"), for: .normal)
         return button
     }()
     
     private lazy var ScoreCapsule: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.tintColor = UIColor.label
@@ -89,7 +91,7 @@ class GameDetailViewController: UIViewController {
     }()
     
     private lazy var platformPC: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
         let image = UIImage(systemName: "desktopcomputer")
@@ -99,7 +101,7 @@ class GameDetailViewController: UIViewController {
     }()
     
     private lazy var platformXbox: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
         let image = UIImage(systemName: "xbox.logo")
@@ -109,7 +111,7 @@ class GameDetailViewController: UIViewController {
     }()
     
     private lazy var platformSony: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
         let image = UIImage(systemName: "playstation.logo")
@@ -119,12 +121,27 @@ class GameDetailViewController: UIViewController {
     }()
     
     private lazy var platformNintendo: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
         let image = UIImage(systemName: "n.square.fill")
         button.addTarget(self, action: #selector(pressInfoGame), for: .touchUpInside)
         button.setImage(image, for: .normal)
+        return button
+    }()
+    
+    private lazy var likeGameButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(systemName: "heart")
+        button.addTarget(self, action: #selector(pressLikeButton), for: .touchUpInside)
+        button.setImage(image, for: .normal)
+        button.tintColor = UIColor.white
+        button.backgroundColor = UIColor.systemPink
+        button.isUserInteractionEnabled = true
+        button.isHidden = true
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
     
@@ -166,6 +183,12 @@ class GameDetailViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
         guard let id = gameId else {return}
         vm.fetchGameDetail(id)
+        
+        if isBeingDismissed {
+            if Globals.sharedInstance.isFavoriteChanged {
+                delegateFavorite?.viewWillAppear(true)
+            }
+        }
     }
     
     // MARK: - Helpers
@@ -174,6 +197,8 @@ class GameDetailViewController: UIViewController {
         view.backgroundColor = UIColor.systemBackground
         
         view.addSubview(gameImageView)
+        gameImageView.addSubview(likeGameButton)
+        view.addSubview(likeGameButton)
         view.addSubview(gamePublisherLabel)
         view.addSubview(gameTitleLabel)
         view.addSubview(gameInfoLabel)
@@ -208,22 +233,8 @@ class GameDetailViewController: UIViewController {
         
         gameStackView.anchor(top: gameDetailLabel.bottomAnchor, left: safeArea.leftAnchor, right: safeArea.rightAnchor, paddingTop: 25, paddingLeft: 15, paddingRight: 15)
         
-    }
-    
-    
-    // MARK: - Actions
-    @objc func pressInfoGame() {
-        if let url = URL(string: Globals.sharedInstance.backlinkHelper(id: gameId)) {
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url)
-            } else {
-                // Handle error: the URL cannot be opened
-                print("Cannot open URL: \(url)")
-            }
-        } else {
-            // Handle error: the URL string is invalid
-            print("Invalid URL string")
-        }
+        likeGameButton.anchor(top: gameImageView.topAnchor, right: gameImageView.rightAnchor,width: 30, height: 30 ,paddingTop: 5, paddingRight: 5)
+        
     }
     
     private func enablePlatform(id:Int){
@@ -246,19 +257,56 @@ class GameDetailViewController: UIViewController {
         }
     }
     
+    private func favoriteHandler(status:Bool?){
+        if let status{
+            if status{
+                likeGameButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            }else{
+                likeGameButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            }
+            likeGameButton.isHidden = false
+            return
+        }
+        likeGameButton.isHidden = true
+        return
+    }
+    
+    
+    // MARK: - Actions
+    @objc func pressInfoGame() {
+        if let url = URL(string: Globals.sharedInstance.backlinkHelper(id: gameId)) {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            } else {
+                // Handle error: the URL cannot be opened
+                print("Cannot open URL: \(url)")
+            }
+        } else {
+            // Handle error: the URL string is invalid
+            print("Invalid URL string")
+        }
+    }
+    
+    @objc func pressLikeButton() {
+        favoriteHandler(status: vm.handleFavorite())
+        print("Favorite button tapped")
+    }
     
 }
 
 extension GameDetailViewController: GameDetailViewModelDelegate {
     func gameLoaded() {
+        if let id = self.gameId {
+            self.favoriteHandler(status: self.vm.isFavoriteGame(id))
+        }
         self.gamePublisherLabel.text = self.vm.getGamePublisher()
         self.gameTitleLabel.text = self.vm.getGameTitle()
         self.gameInfoLabel.text = self.vm.getGameInfo()
         self.RateCapsule.setTitle(self.vm.getGameRating(), for: .normal)
         if let date = self.vm.getGameDate() {
-            self.DateCapsule.setTitle(date, for: .normal)
+            self.DateCapsule.setTitle(" \(date)", for: .normal)
         } else {
-            self.DateCapsule.setTitle("Release Date", for: .normal)
+            self.DateCapsule.setTitle("", for: .normal)
         }
         
         if let score = self.vm.getGameScore() {
@@ -268,7 +316,6 @@ extension GameDetailViewController: GameDetailViewModelDelegate {
             self.ScoreCapsule.setImage(UIImage(systemName: "star.slash"), for: .normal)
         }
         self.gameDetailLabel.text = self.vm.getGameDetail()
-        
         self.gameImageView.kf.indicatorType = .activity
         self.gameImageView.kf.setImage(with: self.vm.getGameImageUrl(640), placeholder: nil)
         
@@ -277,7 +324,9 @@ extension GameDetailViewController: GameDetailViewModelDelegate {
                 self.enablePlatform(id: i.platform?.id ?? 0)
             }
         }
+        likeGameButton.isHidden = false
         infoStackView.isHidden = false
+        
         activityIndatorView.stopAnimating()
     }
 }

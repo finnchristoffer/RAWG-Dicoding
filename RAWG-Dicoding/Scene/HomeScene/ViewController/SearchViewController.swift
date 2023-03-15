@@ -14,10 +14,10 @@ class SearchViewController: UIViewController {
     
     private lazy var searchStatusLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 18)
+        label.textColor = UIColor.tertiaryLabel
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.center = view.center
-        label.text = "You can Search Game"
+        label.text = "You can use the searchbar"
         return label
     }()
     
@@ -60,24 +60,11 @@ class SearchViewController: UIViewController {
         
     }
     
-    // MARK: - Segue Functions
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "SearchtoDetail":
-            if let gameId = sender as? Int{
-                let goalVC = segue.destination as! GameDetailViewController
-                goalVC.gameId = gameId
-            }
-        default:
-            print("identifier not found")
-        }
-    }
-    
     // MARK: - Helpers
     
     private func setupViews() {
         view.addSubview(searchBar)
-        view.addSubview(searchStatusLabel)
+        gameListTableView.addSubview(searchStatusLabel)
         view.addSubview(gameListTableView)
     }
     
@@ -87,14 +74,15 @@ class SearchViewController: UIViewController {
         
         
         gameListTableView.anchor(top: searchBar.bottomAnchor, left: safeArea.leftAnchor,bottom: safeArea.bottomAnchor ,right: safeArea.rightAnchor)
+        
+        searchStatusLabel.center(inView: safeArea)
     }
     
     private func statusHelper(_ status:Int){
         searchStatusLabel.tag = status
         switch status {
         case 0:
-
-            searchStatusLabel.text = "You can Search Game"
+            searchStatusLabel.text = "You can use searchbar"
             searchStatusLabel.isHidden = false
         case 1:
             searchStatusLabel.isHidden = true

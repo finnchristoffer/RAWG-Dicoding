@@ -20,6 +20,9 @@ protocol GameDetailViewModelProtocol {
     func getGameScore() -> String?
     func getGameDetail() -> String?
     func getGamePlatforms() -> [ParentPlatform]?
+    
+    func handleFavorite() -> Bool?
+    func isFavoriteGame(_ id: Int) -> Bool?
 }
 
 protocol GameDetailViewModelDelegate: AnyObject {
@@ -110,5 +113,39 @@ final class GameDetailViewModel: GameDetailViewModelProtocol {
     
     func getGamePlatforms() -> [ParentPlatform]? {
         return game?.parentPlatforms
+    }
+    
+    func handleFavorite() -> Bool? {
+        if let gameId = game?.id {
+            if let isFavorite = isFavoriteGame(gameId) {
+                if isFavorite {return unlikeGame() }
+                return likeGame()
+            }
+            return nil
+        }
+        return nil
+    }
+    
+    func isFavoriteGame(_ id: Int) -> Bool? {
+        FavoriteCoreDataManager.shared.isFavorite(id)
+    }
+    
+    // MARK: - Favorite Helpers
+    private func likeGame() -> Bool {
+        if let gameId = game?.id, let imageId = URL(string: game?.imageWide ?? "")?.lastPathComponent{
+            guard FavoriteCoreDataManager.shared.saveFavorite(gameId: gameId, imageId: imageId) != nil else {return !true}
+            Globals.sharedInstance.isFavoriteChanged = true
+            return true
+        }
+        return !true
+    }
+    
+    private func unlikeGame() -> Bool {
+        if let gameId = game?.id{
+            guard FavoriteCoreDataManager.shared.deleteFavoriteWithId(id: gameId) != nil else {return !false}
+            Globals.sharedInstance.isFavoriteChanged = true
+            return false
+        }
+        return !false
     }
 }

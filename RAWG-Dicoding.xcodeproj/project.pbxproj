@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A252F0529C099F500C9E001 /* RAWG.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A252F0329C099F500C9E001 /* RAWG.xcdatamodeld */; };
+		4A252F0729C09B8E00C9E001 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A252F0629C09B8E00C9E001 /* CoreDataManager.swift */; };
+		4A252F0D29C0C7B200C9E001 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A252F0C29C0C7B200C9E001 /* FavoriteViewModel.swift */; };
+		4A252F0F29C0CA8000C9E001 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A252F0E29C0CA8000C9E001 /* FavoriteTableViewCell.swift */; };
+		4A3FA02F29C182620001C58C /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3FA02E29C182620001C58C /* FavoriteViewController.swift */; };
 		4A44E2B629B704EE005B635A /* RawgClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A44E2B529B704EE005B635A /* RawgClient.swift */; };
 		4A5D9F1D29B60E1D00A530D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5D9F1C29B60E1D00A530D2 /* AppDelegate.swift */; };
 		4A5D9F1F29B60E1D00A530D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5D9F1E29B60E1D00A530D2 /* SceneDelegate.swift */; };
@@ -33,6 +38,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A252F0429C099F500C9E001 /* RAWG.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RAWG.xcdatamodel; sourceTree = "<group>"; };
+		4A252F0629C09B8E00C9E001 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		4A252F0C29C0C7B200C9E001 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
+		4A252F0E29C0CA8000C9E001 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
+		4A3FA02E29C182620001C58C /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		4A44E2B529B704EE005B635A /* RawgClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawgClient.swift; sourceTree = "<group>"; };
 		4A5D9F1929B60E1D00A530D2 /* RAWG-Dicoding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RAWG-Dicoding.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A5D9F1C29B60E1D00A530D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +101,40 @@
 			path = TabBarScene;
 			sourceTree = "<group>";
 		};
+		4A252F0829C0C77700C9E001 /* FavoriteScene */ = {
+			isa = PBXGroup;
+			children = (
+				4A252F0B29C0C79500C9E001 /* ViewController */,
+				4A252F0A29C0C78C00C9E001 /* View */,
+				4A252F0929C0C78300C9E001 /* ViewModel */,
+			);
+			path = FavoriteScene;
+			sourceTree = "<group>";
+		};
+		4A252F0929C0C78300C9E001 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4A252F0C29C0C7B200C9E001 /* FavoriteViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4A252F0A29C0C78C00C9E001 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4A252F0E29C0CA8000C9E001 /* FavoriteTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4A252F0B29C0C79500C9E001 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4A3FA02E29C182620001C58C /* FavoriteViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		4A44E2B129B7040B005B635A /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				4A44E2B529B704EE005B635A /* RawgClient.swift */,
+				4A252F0629C09B8E00C9E001 /* CoreDataManager.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -115,6 +160,7 @@
 		4A44E2B329B70425005B635A /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				4A252F0829C0C77700C9E001 /* FavoriteScene */,
 				4A18451F29BAFB6D00098BBD /* TabBarScene */,
 				4A98294D29B7062400D14812 /* ProfileScene */,
 				4A98294B29B7061300D14812 /* GameDetailScene */,
@@ -160,6 +206,7 @@
 				4A44E2B329B70425005B635A /* Scene */,
 				4A5D9F2529B60E1E00A530D2 /* Assets.xcassets */,
 				4A5D9F2A29B60E1E00A530D2 /* Info.plist */,
+				4A252F0329C099F500C9E001 /* RAWG.xcdatamodeld */,
 			);
 			path = "RAWG-Dicoding";
 			sourceTree = "<group>";
@@ -418,16 +465,21 @@
 				4A5D9F3829B61F7400A530D2 /* Date+Extentions.swift in Sources */,
 				4A98296629B762CA00D14812 /* HomeViewController.swift in Sources */,
 				4A98296429B7624800D14812 /* HomeViewModel.swift in Sources */,
+				4A252F0D29C0C7B200C9E001 /* FavoriteViewModel.swift in Sources */,
+				4A3FA02F29C182620001C58C /* FavoriteViewController.swift in Sources */,
 				4A5D9F1D29B60E1D00A530D2 /* AppDelegate.swift in Sources */,
 				4A5D9F4D29B63DBF00A530D2 /* UIView+Extentions.swift in Sources */,
+				4A252F0729C09B8E00C9E001 /* CoreDataManager.swift in Sources */,
 				4A98296229B7086F00D14812 /* GameTableViewCell.swift in Sources */,
 				4A44E2B629B704EE005B635A /* RawgClient.swift in Sources */,
 				4A98295329B706E600D14812 /* GetRawgResponseModel.swift in Sources */,
 				4A5D9F4129B62E4000A530D2 /* TabBarController.swift in Sources */,
+				4A252F0529C099F500C9E001 /* RAWG.xcdatamodeld in Sources */,
 				4A5D9F4929B6357E00A530D2 /* ProfileModel.swift in Sources */,
 				4A98296829B762D400D14812 /* SearchViewController.swift in Sources */,
 				4A98296E29B78F3C00D14812 /* HomeView.swift in Sources */,
 				4A98294A29B705D600D14812 /* RawgModel.swift in Sources */,
+				4A252F0F29C0CA8000C9E001 /* FavoriteTableViewCell.swift in Sources */,
 				4A5D9F1F29B60E1D00A530D2 /* SceneDelegate.swift in Sources */,
 				4A98295A29B7076700D14812 /* Secrets.swift in Sources */,
 				4A98296C29B770CB00D14812 /* GameDetailViewController.swift in Sources */,
@@ -631,6 +683,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4A252F0329C099F500C9E001 /* RAWG.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4A252F0429C099F500C9E001 /* RAWG.xcdatamodel */,
+			);
+			currentVersion = 4A252F0429C099F500C9E001 /* RAWG.xcdatamodel */;
+			path = RAWG.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4A5D9F1129B60E1D00A530D2 /* Project object */;
 }
